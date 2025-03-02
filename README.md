@@ -132,3 +132,8 @@ Start the app using PM2.
 
 **OUTPUT OF JENKINS CI/CD**
 ![git project](https://github.com/user-attachments/assets/c056a3ac-c7a2-41d0-abfa-7c0cb1af44f7)
+
+
+**OUTPUT OF AWS SERVER**
+![image](https://github.com/user-attachments/assets/36a524c7-e87d-4904-906d-157c62d6a63f)
+
