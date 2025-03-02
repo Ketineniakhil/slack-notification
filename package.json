@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Skipping tests\" && exit 0"
+    "test": "echo \"Skipping tests\" && exit 0",
+    "build": "echo 'No build step needed' && exit 0"
   },
   "keywords": [],
   "author": "",
