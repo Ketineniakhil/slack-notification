@@ -31,10 +31,10 @@ Before setting up the CI/CD pipeline, ensure you have the following:
 ---
 
 ## 📂 Project Structure  
-├── Jenkinsfile # CI/CD pipeline for Jenkins 
-├── package.json # Node.js project configuration 
-├── index.js # Main application entry point 
-├── .gitignore # Files to ignore in Git
+├── Jenkinsfile # CI/CD pipeline for Jenkins                         
+├── package.json # Node.js project configuration                  
+├── index.js # Main application entry point                               
+├── .gitignore # Files to ignore in Git                         
 
 
 ## 🚀 Step-by-Step Setup Guide 
@@ -129,5 +129,5 @@ Install dependencies.
 Run tests.
 Deploy the app to the staging server.
 Start the app using PM2.
-**OUTPUT OF JENKINS CI/CD**
+#**OUTPUT OF JENKINS CI/CD**
 ![git project](https://github.com/user-attachments/assets/c056a3ac-c7a2-41d0-abfa-7c0cb1af44f7)
