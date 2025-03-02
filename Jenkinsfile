@@ -28,8 +28,9 @@ pipeline {
 
         stage('Deploy to Staging') {
             steps {
-                sh 'scp -o StrictHostKeyChecking=no -i /root/.ssh/default-ecc.pem -r * ubuntu@3.84.43.45:/var/www/app'
-                sh 'ssh -o StrictHostKeyChecking=no -i /root/.ssh/default-ecc.pem ubuntu@3.84.43.45 "pm2 start /var/www/app/index.js --name slack-app || pm2 restart slack-app"'
+                sh 'rsync -avz -e "ssh -o StrictHostKeyChecking=no -i /root/.ssh/default-ecc.pem" --exclude node_modules . ubuntu@3.84.43.45:/var/www/app'
+                sh 'ssh -o StrictHostKeyChecking=no -i /root/.ssh/default-ecc.pem ubuntu@3.84.43.45 "cd /var/www/app && npm install"'
+                sh 'ssh -o StrictHostKeyChecking=no -i /root/.ssh/default-ecc.pem ubuntu@3.84.43.45 "pm2 restart slack-app || pm2 start /var/www/app/index.js --name slack-app"'
             }
         }
     }
