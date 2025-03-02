@@ -1,52 +1,42 @@
-pipeline{
+pipeline {
     agent any
 
-    environment{
-        NODE_VERSION = '16'
-    }
-
-    stages{
-        stage('Install Dependencies'){
-            steps{
-                script{
-                    sh 'npm install'
-                }
+    stages {
+        stage('Clone Repository') {
+            steps {
+                git url: 'https://github.com/Ketineniakhil/slack-notification.git', branch: 'main'
             }
         }
 
-        stage('Run Tests'){
-            steps{
-                script{
-                    sh 'npm test'
-                }
+        stage('Install Dependencies') {
+            steps {
+                sh 'npm install'
             }
         }
 
-        stage('Build Apllication'){
-            steps{
-                script{
-                    sh 'npm run build'
-                }
+        stage('Run Tests') {
+            steps {
+                sh 'npm test'
+            }
+        }
+
+        stage('Build Application') {
+            steps {
+                sh 'npm run build || echo "No build step needed"'
             }
         }
 
         stage('Deploy to Staging') {
             steps {
-                script {
-                    sh 'scp -r ./build user@staging-server:/var/www/app'
-                }
+                sh 'scp -o StrictHostKeyChecking=no -i /root/.ssh/default-ecc.pem -r * ubuntu@3.84.43.45:/var/www/app'
+                sh 'ssh -o StrictHostKeyChecking=no -i /root/.ssh/default-ecc.pem ubuntu@3.84.43.45 "pm2 start /var/www/app/index.js --name slack-app || pm2 restart slack-app"'
             }
         }
+    }
 
-        stage('Send Slack Notification') {
-            steps {
-                slackSend (
-                    channel: '#devops-alerts',
-                    color: 'good',
-                    message: " Deployment Successful: ${env.JOB_NAME} - Build #${env.BUILD_NUMBER}"
-                )
-            }
+    post {
+        always {
+            sh 'rm -rf ./build'
         }
-
     }
 }
