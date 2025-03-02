@@ -129,5 +129,6 @@ Install dependencies.
 Run tests.
 Deploy the app to the staging server.
 Start the app using PM2.
-#**OUTPUT OF JENKINS CI/CD**
+
+**OUTPUT OF JENKINS CI/CD**
 ![git project](https://github.com/user-attachments/assets/c056a3ac-c7a2-41d0-abfa-7c0cb1af44f7)
