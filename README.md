@@ -84,7 +84,7 @@ pm2 startup systemd
 Then copy and run the command shown in the output.
 
 3️⃣ Set Up Nginx as a Reverse Proxy (Optional)
-To access your app without specifying a port (http://3.84.43.45 instead of http://3.84.43.45:3000):
+To access your app without specifying a port 
 
 🔹 Install Nginx
 ```
@@ -95,12 +95,12 @@ sudo apt install -y nginx
 sudo nano /etc/nginx/sites-available/default
 ```
 Replace the content with:
-```
+
 nginx
 ```
 server {
     listen 80;
-    server_name 3.84.43.45;
+    server_name YOUR IP;
 
     location / {
         proxy_pass http://localhost:3000;
@@ -111,6 +111,7 @@ server {
 }
 ```
 🔹 Restart Nginx
+
 ```
 sudo systemctl restart nginx
 ````
@@ -128,3 +129,5 @@ Install dependencies.
 Run tests.
 Deploy the app to the staging server.
 Start the app using PM2.
+**OUTPUT OF JENKINS CI/CD**
+![git project](https://github.com/user-attachments/assets/c056a3ac-c7a2-41d0-abfa-7c0cb1af44f7)
