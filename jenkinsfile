@@ -1,0 +1,52 @@
+pipeline{
+    agent any
+
+    environment{
+        NODE_VERSION = '16'
+    }
+
+    stages{
+        stage('Install Dependencies'){
+            steps{
+                script{
+                    sh 'npm install'
+                }
+            }
+        }
+
+        stage('Run Tests'){
+            steps{
+                script{
+                    sh 'npm test'
+                }
+            }
+        }
+
+        stage('Build Apllication'){
+            steps{
+                script{
+                    sh 'npm run build'
+                }
+            }
+        }
+
+        stage('Deploy to Staging') {
+            steps {
+                script {
+                    sh 'scp -r ./build user@staging-server:/var/www/app'
+                }
+            }
+        }
+
+        stage('Send Slack Notification') {
+            steps {
+                slackSend (
+                    channel: '#devops-alerts',
+                    color: 'good',
+                    message: " Deployment Successful: ${env.JOB_NAME} - Build #${env.BUILD_NUMBER}"
+                )
+            }
+        }
+
+    }
+}
